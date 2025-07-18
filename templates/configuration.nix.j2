@@ -9,22 +9,21 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
-  networking.hostName = "snafu-jellyfin-nixos";
+
+  networking.hostName = "{{ hostname }}";
   networking.networkmanager.enable = true;
-  time.timeZone = "AKDT";
+  networking.firewall.enable = true;
 
-  services.jellyfin = {
-    enable = true;
-    openFirewall = true;
-  };
+  time.timeZone = "{{ timeZone }}";
 
-  services.qemuGuest.enable = true;
   services.tailscale.enable = true;
+  services.openssh.enable = true;
+
   users.users.mike = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
     packages = with pkgs; [
-      tree
+      neovim
     ];
   };
 
@@ -32,9 +31,6 @@
     vim
     wget
     nh
-    jellyfin
-    jellyfin-ffmpeg
-    neovim
     btop
   ];
 
@@ -43,8 +39,6 @@
     enableSSHSupport = true;
   };
 
-  services.openssh.enable = true;
-  networking.firewall.enable = true;
   system.copySystemConfiguration = true;
   system.stateVersion = "25.05";
 
