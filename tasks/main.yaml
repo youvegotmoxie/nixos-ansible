@@ -1,0 +1,12 @@
+- name: "Copy main NixOS configuration to {{ hostname }}"
+  ansible.builtin.template:
+    src: templates/{{ item }}.nix.j2
+    dest: /etc/nixos/{{ item }}.nix
+    mode: '0644'
+    owner: root
+    group: root
+  loop:
+    - configuration
+    - users
+    - filesystems
+    - hyprland

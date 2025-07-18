@@ -1,0 +1,10 @@
+---
+- name: "Configure NixOS"
+  hosts: all
+  gather_facts: true
+  vars_files:
+    - vars/snafu-nixos.yaml
+  tasks:
+    - name: "Setup main NixOS configuration"
+      ansible.builtin.include_tasks:
+        file: tasks/main.yaml

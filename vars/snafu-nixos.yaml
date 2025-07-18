@@ -1,3 +1,4 @@
 ---
 hostname: 'snafu-nixos'
 timeZone: 'AKDT'
+usernames: ['mike']

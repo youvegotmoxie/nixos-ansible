@@ -1,0 +1,15 @@
+{ config, lib, pkgs, ... }:
+
+{
+  # Temp mount old home to /home2
+  fileSystems."/home" = {
+    device  = "/dev/nvme0n1p1";
+    fsType  = "btrfs";
+    options = ["compress=lzo"];
+  };
+
+  # Redefine / here so we can turn on compression
+  fileSystems."/" = {
+    options = ["compress=lzo"];
+  };
+}

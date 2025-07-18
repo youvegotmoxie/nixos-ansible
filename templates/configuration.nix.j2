@@ -1,47 +1,78 @@
 { config, lib, pkgs, ... }:
 
 {
+  # Add config file imports
   imports =
     [
       ./hardware-configuration.nix
+      ./users.nix
+      ./filesystems.nix
+      ./hyprland.nix
     ];
 
+  # Bootloader and kernel configuration
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
+  # Set hostname and configure networking
   networking.hostName = "{{ hostname }}";
   networking.networkmanager.enable = true;
   networking.firewall.enable = true;
 
+  # TZ and localization settings
   time.timeZone = "{{ timeZone }}";
 
+  # Enable system services
   services.tailscale.enable = true;
   services.openssh.enable = true;
 
-  users.users.mike = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" ];
-    packages = with pkgs; [
-      neovim
-    ];
-  };
-
+  # Globally installed packages
   environment.systemPackages = with pkgs; [
+    ansible
+    ansible-lint
+    nodejs
+    btop
+    git
+    go
+    kitty
+    lsb-release
+    neovim
+    nh
+    jdk21_headless
+    jq
+    pinentry-curses
+    python3
+    rocmPackages.rocm-smi
     vim
     wget
-    nh
-    btop
+    yq
   ];
 
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
-  };
+  # Start SSH agent for SSH jumping
+  programs.ssh.startAgent = true;
 
+
+  # NixOS system settings
   system.copySystemConfiguration = true;
   system.stateVersion = "25.05";
 
+  # Add rocmSupport to all Nix packages. Fixes no GPU stats in btop
+  nixpkgs.config.rocmSupport = true;
+
+  # Allow wheel group passwordless sudo
+  security.sudo.wheelNeedsPassword = false;
+
+  # Configure audio, bluetooth and controllers
+  services.pipewire = {
+    enable = true;
+    wireplumber.enable = true;
+  };
+  hardware.bluetooth.enable = true;
+  hardware.xone.enable = true;
+  services.blueman.enable = true;
+
+  # Internal NixOS confguration
   nix.settings = {
     auto-optimise-store = true;
     experimental-features = [ "nix-command" "flakes" ];

@@ -1,0 +1,26 @@
+{ config, lib, pkgs, ... }:
+
+{
+  # Install Hyprland
+  programs.hyprland = {
+    enable = true;
+    xwayland.enable = true;
+    withUWSM = true;
+  };
+
+  # Setup UWSM configuration for Wayland+Hyprland
+  programs.uwsm.waylandCompositors = {
+    hyprland = {
+      prettyName = "Hyprland";
+      comment = "Hyprland compositor managed by UWSM";
+      binPath = "/run/current-system/sw/bin/Hyprland";
+    };
+  };
+
+  # Enable Hypr* utils
+  programs.hyprlock.enable = true;
+  services.hypridle.enable = true;
+
+  # Install and enable GDM (login manager)
+  services.displayManager.gdm.enable = true;
+}
