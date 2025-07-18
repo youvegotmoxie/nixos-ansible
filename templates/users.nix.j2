@@ -13,7 +13,7 @@
     shell        = pkgs.bash;
     home         = "/home/{{ user }}";
     createHome   = true;
-    description  = "(interactive user) {{ user }}";
+    description  = "{{ user }}";
     packages     = with pkgs; [
       atuin
       bat
@@ -23,11 +23,13 @@
       hyprutils
       hyprpaper
       hyprpolkitagent
+      rofi
       # END Hyprland deps
       eza
       delta
       lazygit
       pre-commit
+      ripgrep
       starship
       ugrep
       uv

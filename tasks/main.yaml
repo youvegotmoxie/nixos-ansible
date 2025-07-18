@@ -10,3 +10,13 @@
     - users
     - filesystems
     - hyprland
+
+- name: "Copy Hyprland configuration"
+  ansible.builtin.copy:
+    src: "files/{{ item }}-{{ hostname }}-hyprland.conf"
+    dest: "/home/{{ item }}/.config/hypr/hyprland.conf"
+    mode: '0644'
+    owner: "{{ item }}"
+    group: "{{ item }}"
+    state: file
+  with_items: "{{ usernames }}"
