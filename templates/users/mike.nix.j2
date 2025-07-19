@@ -1,19 +1,18 @@
 { config, lib, pkgs, ... }:
 
 {
-{% for user in usernames %}
   # Create user's main group
-  users.groups.{{ user }} = {};
+  users.groups.{{ username }} = {};
 
   # Create user
-  users.users.{{ user }} = {
+  users.users.{{ username }} = {
     isNormalUser = true;
-    group        = "{{ user }}";
+    group        = "{{ username }}";
     extraGroups  = [ "wheel" "users" ];
     shell        = pkgs.bash;
-    home         = "/home/{{ user }}";
+    home         = "/home/{{ username }}";
     createHome   = true;
-    description  = "{{ user }}";
+    description  = "{{ username }}";
     packages     = with pkgs; [
       atuin
       bat
@@ -28,13 +27,13 @@
       pre-commit
       ripgrep
       starship
+      tree
       ugrep
       uv
       viddy
       zoxide
     ];
   };
-{% endfor %}
 
   # Install and configure Steam
   programs.steam = {
@@ -42,11 +41,11 @@
     remotePlay.openFirewall = true;
     localNetworkGameTransfers.openFirewall = true;
   };
+
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
     "steam"
     "steam-original"
     "steam-unwrapped"
     "steam-run"
   ];
-
 }

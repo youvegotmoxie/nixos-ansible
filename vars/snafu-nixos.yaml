@@ -1,4 +1,5 @@
 ---
 hostname: 'snafu-nixos'
-timeZone: 'AKDT'
-usernames: ['mike']
+timeZone: 'America/Anchorage'
+username: 'mike'
+gnome_enabled: true
