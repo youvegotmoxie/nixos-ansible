@@ -17,17 +17,13 @@
     packages     = with pkgs; [
       atuin
       bat
+      bitwarden
+      bitwarden-cli
       direnv
-      # BEGIN Hyprland deps
-      dunst
-      hyprutils
-      hyprpaper
-      hyprpolkitagent
-      rofi
-      # END Hyprland deps
       delta
       eza
       fd
+      ghostty
       lazygit
       pre-commit
       ripgrep
@@ -39,4 +35,18 @@
     ];
   };
 {% endfor %}
+
+  # Install and configure Steam
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true;
+    localNetworkGameTransfers.openFirewall = true;
+  };
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+    "steam"
+    "steam-original"
+    "steam-unwrapped"
+    "steam-run"
+  ];
+
 }

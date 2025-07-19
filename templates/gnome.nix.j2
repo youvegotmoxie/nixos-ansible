@@ -1,0 +1,28 @@
+{ config, lib, pkgs, ... }:
+
+{
+  services.desktopManager.gnome.enable = true;
+
+  environment.systemPackages = with pkgs; [
+    gnomeExtensions.blur-my-shell
+    gnomeExtensions.bluetooth-file-sender
+    gnomeExtensions.user-avatar-in-quick-settings
+    gnomeExtensions.night-light-slider
+    gnome-browser-connector
+    gnome-tweaks
+    gnome-themes-extra
+  ];
+
+  environment.gnome.excludePackages = with pkgs; [
+    gnome-tour
+    gnome-terminal
+    gnome-text-editor
+    gnome-music
+    gnome-contacts
+    epiphany
+    geary
+    evince
+    totem
+    simple-scan
+  ];
+}

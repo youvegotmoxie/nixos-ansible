@@ -7,7 +7,8 @@
       ./hardware-configuration.nix
       ./users.nix
       ./filesystems.nix
-      ./hyprland.nix
+      ./gnome.nix
+      #./hyprland.nix
     ];
 
   # Bootloader and kernel configuration
@@ -27,6 +28,21 @@
   services.tailscale.enable = true;
   services.openssh.enable = true;
 
+  # Set NixOS specific env vars
+  environment = {
+    sessionVariables = rec {
+      NIXOS_OZONE_WL = "1";
+      XDG_CACHE_HOME = "$HOME/.cache";
+      XDG_CONFIG_HOME = "$HOME/.config";
+      XDG_DATA_HOME = "$HOME/.local/share";
+      XDG_STATE_HOME = "$HOME/.local/state";
+      XDG_BIN_HOME = "$HOME/.local/bin";
+      PATH = [
+        "${XDG_BIN_HOME}"
+      ];
+    };
+  };
+
   # Globally installed packages
   environment.systemPackages = with pkgs; [
     ansible
@@ -36,7 +52,6 @@
     clang
     git
     go
-    kitty
     lsb-release
     neovim
     nh
@@ -51,9 +66,13 @@
     yq
   ];
 
-  # Start SSH agent for SSH jumping
-  programs.ssh.startAgent = true;
+  # Install and configure Flatpak
+  services.flatpak.enable = true;
+  xdg.portal.enable = true;
 
+  # Install and enable GDM (login manager)
+  services.displayManager.gdm.enable = true;
+  services.power-profiles-daemon.enable = true;
 
   # NixOS system settings
   system.copySystemConfiguration = true;
@@ -65,14 +84,9 @@
   # Allow wheel group passwordless sudo
   security.sudo.wheelNeedsPassword = false;
 
-  # Configure audio, bluetooth and controllers
-  services.pipewire = {
-    enable = true;
-    wireplumber.enable = true;
-  };
+  # Configure audio, keyboard, bluetooth and controllers
   hardware.bluetooth.enable = true;
   hardware.xone.enable = true;
-  services.blueman.enable = true;
 
   # Internal NixOS confguration
   nix.settings = {
