@@ -12,8 +12,19 @@
     ./zoxide.nix
   ];
 
+  # Set home defaults
   home.username = "{{ username }}";
   home.homeDirectory = "/home/{{ username }}";
+
+  # Configure home-manager
+  programs.home-manager.enable = true;
+  services.home-manager.autoExpire.enable = true;
+
+  # Set EDITOR to nvim
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+  };
 
   # Install user packages
   home.packages = with pkgs; [
@@ -36,7 +47,6 @@
     lazydocker
     lazygit
     nodejs
-    neovim
     pre-commit
     ripgrep
     starship
