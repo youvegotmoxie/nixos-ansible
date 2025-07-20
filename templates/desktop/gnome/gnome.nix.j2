@@ -16,10 +16,7 @@
     gnome-themes-extra
     chrome-gnome-shell
     gnome-shell-extensions
-    tela-icon-theme
     kora-icon-theme
-    reversal-icon-theme
-    papirus-icon-theme
   ];
 
   environment.gnome.excludePackages = with pkgs; [
@@ -32,6 +29,7 @@
     geary
     evince
     totem
+    cheese
     simple-scan
   ];
 }
