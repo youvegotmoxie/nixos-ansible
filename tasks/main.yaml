@@ -76,7 +76,7 @@
 
 - name: "Copy Hyprland user configuration for {{ username }}"
   ansible.builtin.copy:
-    src: "files/{{ username }}-{{ hostname }}-{{ item }}.conf"
+    src: "files/hypr/{{ item }}.conf"
     dest: "/home/{{ username }}/.config/hypr/{{ item }}.conf"
     mode: '0644'
     owner: "{{ username }}"
