@@ -33,6 +33,21 @@
     - "flatpak"
     - "home"
 
+- name: "Copy user NixOS home-manager software configuration(s)"
+  ansible.builtin.template:
+    src: templates/users/software/{{ item }}.nix.j2
+    dest: /etc/nixos/users/{{ item }}.nix
+    mode: '0644'
+    owner: "{{ username }}"
+    group: "{{ username }}"
+  loop:
+    - atuin
+    - bash
+    - btop
+    - ghostty
+    - git
+    - starship
+
 - name: "Copy Gnome environment NixOS configuration"
   ansible.builtin.template:
     src: templates/desktop/gnome/{{ item }}.nix.j2

@@ -3,3 +3,5 @@ hostname: 'snafu-nixos'
 timeZone: 'America/Anchorage'
 username: 'mike'
 gnome_enabled: true
+git_user: 'MikeB'
+git_email: 'youvegotmoxie@gmail.com'
