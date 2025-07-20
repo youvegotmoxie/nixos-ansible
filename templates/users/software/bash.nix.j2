@@ -21,12 +21,7 @@
       # Enable VIM keybinds
       set -o vi
 
-      ## Setup shell programs
-
-      # Disable as home-manager adds this #
-      # eval "$(atuin init bash --disable-up-arrow)"
-
-      eval "$(starship init bash)"
+      ## init shell programs
       eval "$(zoxide init bash --cmd cd)"
 
       # If a Python venv exists then activate it
@@ -34,6 +29,7 @@
           source ~/.venv/bin/activate
       fi
 
+      # Helper function for git add+commit+push
       git-sendit () {
         local branch="$(git branch --show-current)"
         git add .
