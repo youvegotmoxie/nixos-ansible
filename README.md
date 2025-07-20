@@ -1,6 +1,7 @@
-#### Invocation
+#### Bootstrapping
+Get past the chicken egg problem of needing make and nh by using `nix-shell`
 ```bash
-$ nix-shell -p cmake --run "make all"
+$ nix-shell -p cmake -p nh --run "make all"
 ```
 
 
