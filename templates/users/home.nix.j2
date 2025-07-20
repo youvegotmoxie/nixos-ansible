@@ -40,6 +40,7 @@
     delta
     eza
     fd
+    gh
     ghostty
     go
     jdk21_headless
