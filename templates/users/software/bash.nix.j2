@@ -21,9 +21,6 @@
       # Enable VIM keybinds
       set -o vi
 
-      ## init shell programs
-      eval "$(zoxide init bash --cmd cd)"
-
       # If a Python venv exists then activate it
       if [ -d $HOME/.venv ]; then
           source ~/.venv/bin/activate

@@ -47,6 +47,7 @@
     - ghostty
     - git
     - starship
+    - zoxide
 
 - name: "Copy Gnome environment NixOS configuration"
   ansible.builtin.template:
