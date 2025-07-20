@@ -8,22 +8,31 @@
   users.users.{{ username }} = {
     isNormalUser = true;
     group        = "{{ username }}";
-    extraGroups  = [ "wheel" "users" ];
+    extraGroups  = [ "wheel" "users" "qemu-libvirtd" ];
     shell        = pkgs.bash;
     home         = "/home/{{ username }}";
     createHome   = true;
     description  = "{{ username }}";
     packages     = with pkgs; [
+      ansible
+      ansible-lint
       atuin
       bat
+      bfs
       bitwarden
       bitwarden-cli
+      brave
       direnv
       delta
       eza
       fd
       ghostty
+      go
+      jdk21_headless
+      jq
       lazygit
+      nodejs
+      neovim
       pre-commit
       ripgrep
       starship
@@ -31,7 +40,10 @@
       ugrep
       uv
       viddy
+      yq
       zoxide
+      gnome-boxes
+      virt-manager
     ];
   };
 
@@ -48,4 +60,21 @@
     "steam-unwrapped"
     "steam-run"
   ];
+
+  # Setup QEMU + KVM
+  virtualisation.libvirtd = {
+    enable = true;
+    qemu = {
+      package = pkgs.qemu_kvm;
+      runAsRoot = false;
+      swtpm.enable = true;
+      ovmf = {
+        enable = true;
+        packages = [(pkgs.OVMF.override {
+          secureBoot = true;
+          tpmSupport = true;
+        }).fd];
+      };
+    };
+  };
 }

@@ -1,55 +1,61 @@
+- name: "Create NixOS config dirs"
+  ansible.builtin.file:
+    path: "/etc/nixos/{{ item }}"
+    state: directory
+    mode: '0755'
+    owner: "{{ username }}"
+    group: "{{ username }}"
+  loop:
+    - users
+    - desktop
+
 - name: "Copy main NixOS configuration"
   ansible.builtin.template:
-    src: templates/{{ item }}.nix.j2
+    src: templates/system/{{ item }}.nix.j2
     dest: /etc/nixos/{{ item }}.nix
     mode: '0644'
-    owner: root
-    group: root
+    owner: "{{ username }}"
+    group: "{{ username }}"
   loop:
     - configuration
     - filesystems
-
-- name: "Create NixOS users dir"
-  ansible.builtin.file:
-    path: /etc/nixos/users
-    state: directory
-    mode: '0755'
+    - flake
 
 - name: "Copy user NixOS configuration"
   ansible.builtin.template:
     src: templates/users/{{ item }}.nix.j2
     dest: /etc/nixos/users/{{ item }}.nix
     mode: '0644'
-    owner: root
-    group: root
+    owner: "{{ username }}"
+    group: "{{ username }}"
   loop:
     - mike
 
 - name: "Copy Gnome environment NixOS configuration"
   ansible.builtin.template:
-    src: templates/{{ item }}.nix.j2
-    dest: /etc/nixos/{{ item }}.nix
+    src: templates/desktop/gnome/{{ item }}.nix.j2
+    dest: /etc/nixos/desktop/{{ item }}.nix
     mode: '0644'
-    owner: root
-    group: root
+    owner: "{{ username }}"
+    group: "{{ username }}"
   loop:
     - gnome
   when:
     - gnome_enabled is defined
-    - gnome_enabled == True
+    - gnome_enabled
 
 - name: "Copy Hyprland NixOS configuration"
   ansible.builtin.template:
-    src: templates/{{ item }}.nix.j2
-    dest: /etc/nixos/{{ item }}.nix
+    src: templates/desktop/hypr/{{ item }}.nix.j2
+    dest: /etc/nixos/desktop/{{ item }}.nix
     mode: '0644'
-    owner: root
-    group: root
+    owner: "{{ username }}"
+    group: "{{ username }}"
   loop:
     - hyprland
   when:
     - hyprland_enabled is defined
-    - hyprland_enabled == True
+    - hyprland_enabled
 
 - name: "Copy Hyprland user configuration for {{ username }}"
   ansible.builtin.copy:
@@ -64,4 +70,4 @@
     - hyprlock
   when:
     - hyprland_enabled is defined
-    - hyprland_enabled == True
+    - hyprland_enabled
