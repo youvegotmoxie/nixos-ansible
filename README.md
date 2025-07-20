@@ -1,3 +1,9 @@
+#### Invocation
+```bash
+$ nix-shell -p cmake --run "make all"
+```
+
+
 ```bash
 ├── files
 │   └── hypr
@@ -6,6 +12,7 @@
 │       └── hyprlock.conf
 ├── inventory
 ├── main.yaml
+├── Makefile
 ├── README.md
 ├── tasks
 │   └── main.yaml
@@ -33,4 +40,6 @@
 └── vars
     ├── global.yaml
     └── snafu-nixos.yaml
+
+12 directories, 24 files
 ```

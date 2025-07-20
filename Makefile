@@ -4,7 +4,7 @@ all :
 	nix-shell -p nixpkgs-fmt --run "nixpkgs-fmt /etc/nixos"
 	git -C /etc/nixos add .
 	git -C /etc/nixos commit -m 'updates'
-	nh os switch /etc/nixos -a
+	nh os switch /etc/nixos
 
 git :
 	git -C /etc/nixos add .
