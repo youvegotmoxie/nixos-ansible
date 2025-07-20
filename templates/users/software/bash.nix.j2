@@ -21,8 +21,11 @@
       # Enable VIM keybinds
       set -o vi
 
-      # Setup shell programs
+      ## Setup shell programs
+
+      # Disable as home-manager adds this #
       # eval "$(atuin init bash --disable-up-arrow)"
+
       eval "$(starship init bash)"
       eval "$(zoxide init bash --cmd cd)"
 
@@ -30,6 +33,18 @@
       if [ -d $HOME/.venv ]; then
           source ~/.venv/bin/activate
       fi
+
+      git-sendit () {
+        local branch="$(git branch --show-current)"
+        git add .
+        if [ ! -z "$1" ]
+        then
+          local msg="trivial"
+        else
+          git commit
+        fi
+        git push origin "$branch"
+      }
     '';
   };
 
