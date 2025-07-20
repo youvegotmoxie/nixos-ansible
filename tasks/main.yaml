@@ -29,7 +29,9 @@
     owner: "{{ username }}"
     group: "{{ username }}"
   loop:
-    - mike
+    - "{{ username }}"
+    - "flatpak"
+    - "home"
 
 - name: "Copy Gnome environment NixOS configuration"
   ansible.builtin.template:
