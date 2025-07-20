@@ -33,6 +33,7 @@
     go
     jdk21_headless
     jq
+    lazydocker
     lazygit
     nodejs
     neovim
