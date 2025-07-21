@@ -40,7 +40,6 @@ in
 
   # Configure home-manager
   programs.home-manager.enable = true;
-  services.home-manager.autoExpire.enable = true;
 
   # Configure backups
   services.restic.enable = true;

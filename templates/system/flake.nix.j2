@@ -33,6 +33,8 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
+            # Move conflicting files out of the way instead of crashing home-manager
+            home-manager.backupFileExtension = "hmback";
             home-manager.extraSpecialArgs.flake-inputs = inputs;
             home-manager.users.{{ username }}.home.stateVersion = "25.05";
             # Use Home Manager to manage Flatpaks
