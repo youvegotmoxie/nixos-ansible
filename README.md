@@ -38,6 +38,7 @@ nix-shell -p cmake -p nh -p home-manager --run "make all"
 ```
 
 Alternatively you can use `nix-shell` to create an environment with those tools installed
+This will use what's defined in `shell.nix`
 ```bash
 nix-shell
 ```
