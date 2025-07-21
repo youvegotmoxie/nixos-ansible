@@ -117,6 +117,13 @@ in
     defaultEditor = true;
   };
 
+  # Setup direnv
+  programs.direnv = {
+    enable = true;
+    enableBashIntegration = true;
+    nix-direnv.enable = true;
+  };
+
   # Install user packages
   home.packages = with pkgs; [
     ansible
@@ -127,7 +134,6 @@ in
     bitwarden
     bitwarden-cli
     brave
-    direnv
     delta
     eza
     fd
