@@ -21,6 +21,36 @@
   programs.home-manager.enable = true;
   services.home-manager.autoExpire.enable = true;
 
+  # Configure backups
+  services.restic.enable = true;
+  services.restic.backups = {
+    localbackup = {
+      exclude = [
+        "/home/{{ username }}/.local/share/Steam"
+        "/home/{{ username }}/Downloads"
+        "/home/{{ username }}/.cache"
+        "/home/{{ username }}/.local/share/gnome-boxes"
+      ];
+      passwordFile = "/opt/backups/password.txt";
+      pruneOpts = [
+        "--keep-daily 7"
+        "--keep-weekly 4"
+        "--keep-monthly 1"
+      ];
+      paths = [
+        "/home/{{ username }}"
+      ];
+      repository = "/opt/backups";
+      timerConfig = {
+        OnCalendar = "daily";
+        RandomizedDelaySec = "1h";
+      };
+      extraBackupArgs = [
+        "--cleanup-cache"
+      ];
+    };
+  };
+
   # Do this instead of setting up Chezmoi
   home.file.".pre-commit.yaml".text = ''
     # See https://pre-commit.com for more information
