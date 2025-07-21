@@ -1,14 +1,20 @@
 
-{ lib, config, pkgs, home-manager, ...}:
+{ lib, config, pkgs, home-manager, sops-nix, ...}:
 
 {
 
   # Configure bash
+  sops.secrets.gh_token = {
+    path = "${config.sops.defaultSymlinkPath}/gh_token";
+  };
   home.shell.enableBashIntegration = true;
   programs.bash = {
     enable = true;
     enableCompletion = true;
     enableVteIntegration = true;
+    initExtra = ''
+      export GH_TOKEN="$(cat ${config.sops.secrets.gh_token.path})"
+    '';
     shellAliases = {
       # Aliases not set by Atuin
       ll = "eza -lahg --git-repos-no-status --git";

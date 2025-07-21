@@ -28,9 +28,10 @@ Create the secrets file `files/secrets/global.yaml` with sops
 nix-shell -p sops --run "sops files/secrets/global.yaml"
 ```
 
-Add the following entry for restic
+Add the following entry for restic and gh_token
 ```yaml
 restic_password: your-password
+gh_token: your-github-token
 ```
 
 #### Bootstrapping
@@ -39,19 +40,23 @@ Get past the chicken egg problem of needing make and nh by using
 nix-shell -p cmake -p nh -p home-manager --run "make all"
 ```
 
-Alternatively you can use `nix-shell` to create an environment with those tools installed
-This will use what's defined in `shell.nix`
+Alternatively you can use `nix develop` to create an environment with those tools installed
+This will use what's defined in `flake.nix`
 ```bash
-nix-shell
+nix develop
 ```
-
+_If you have [direnv](https://direnv.net/) installed this will already be setup for you once you allow the `.envrc`_
 
 ```bash
 ├── files
-│   └── hypr
-│       ├── hypridle.conf
-│       ├── hyprland.conf
-│       └── hyprlock.conf
+│   ├── hypr
+│   │   ├── hypridle.conf
+│   │   ├── hyprland.conf
+│   │   └── hyprlock.conf
+│   └── secrets
+│       └── global.yaml
+├── flake.lock
+├── flake.nix
 ├── inventory
 ├── main.yaml
 ├── Makefile
@@ -78,10 +83,11 @@ nix-shell
 │           ├── btop.nix.j2
 │           ├── ghostty.nix.j2
 │           ├── git.nix.j2
-│           └── starship.nix.j2
+│           ├── starship.nix.j2
+│           └── zoxide.nix.j2
 └── vars
     ├── global.yaml
     └── snafu-nixos.yaml
 
-12 directories, 24 files
+13 directories, 28 files
 ```
