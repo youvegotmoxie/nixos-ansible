@@ -8,6 +8,7 @@
   loop:
     - users
     - desktop
+    - users/secrets
 
 - name: "Copy main NixOS configuration"
   ansible.builtin.template:
@@ -89,3 +90,11 @@
   when:
     - hyprland_enabled is defined
     - hyprland_enabled
+
+- name: "Copy Hyprland user configuration for {{ username }}"
+  ansible.builtin.copy:
+    src: "files/secrets/global.yaml"
+    dest: "/etc/nixos/users/secrets/global.yaml"
+    mode: '0600'
+    owner: "{{ username }}"
+    group: "{{ username }}"

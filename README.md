@@ -1,5 +1,38 @@
+#### Initial Setup
+SOPS needs some pre-configuration
+
+```bash
+ssh-keygen -t ed25519 -f ~/.ssh/sops_ed25519
+mkdir -p ~/.config/sops/age
+nix-shell -p ssh-to-age --run "ssh-to-age -private-key -i ~/.ssh/sops_ed25519 > ~/.config/sops/age/keys.txt"
+nix-shell -p ssh-to-age --run "cat ~/.ssh/sops_ed25519.pub | ssh-to-age"
+```
+
+Create the SOPS encryption config `~/.sops.yaml`
+```yaml
+keys:
+  - &username $output-from-ssh-to-age-sops_ed25519.pub
+creation_rules:
+  - path_regex: secrets/[^/]+\.(yaml|json|env|ini)$
+    key_groups:
+      - pgp:
+        age:
+        - *username
+
+```
+
+Create the secrets file `files/secrets/global.yaml` with sops
+```bash
+nix-shell -p sops --run "sops files/secrets/global.yaml"
+```
+
+Add the following entry for restic
+```yaml
+restic_password: your-password
+```
+
 #### Bootstrapping
-Get past the chicken egg problem of needing make and nh by using ``
+Get past the chicken egg problem of needing make and nh by using
 ```bash
 $ nix-shell -p cmake -p nh -p home-manager --run "make all"
 ```

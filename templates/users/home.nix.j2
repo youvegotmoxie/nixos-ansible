@@ -1,5 +1,9 @@
 { lib, config, pkgs, home-manager, ...}:
 
+let
+  restic_passwd_path = "/opt/backups/password.txt";
+in
+
 {
 
   # Per-application NixOS configuration
@@ -17,6 +21,23 @@
   home.username = "{{ username }}";
   home.homeDirectory = "/home/{{ username }}";
 
+  # Configure sops
+  # TODO: Ansible the manual setup portion of this
+  sops = {
+    age = {
+      keyFile = "/home/{{ username }}/.config/sops/age/keys.txt";
+      sshKeyPaths = [
+        "/home/{{ username }}/.ssh/sops_ed25519"
+      ];
+    };
+    # Relative to home.nix config file: /etc/nixos/users/secrets/global.yaml
+    defaultSopsFile = ./secrets/global.yaml;
+  };
+
+  sops.secrets.restic_password = {
+    path = "${restic_passwd_path}";
+  };
+
   # Configure home-manager
   programs.home-manager.enable = true;
   services.home-manager.autoExpire.enable = true;
@@ -31,7 +52,7 @@
         "/home/{{ username }}/.cache"
         "/home/{{ username }}/.local/share/gnome-boxes"
       ];
-      passwordFile = "/opt/backups/password.txt";
+      passwordFile = "${restic_passwd_path}";
       pruneOpts = [
         "--keep-daily 7"
         "--keep-weekly 4"
