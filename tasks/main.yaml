@@ -91,7 +91,7 @@
     - hyprland_enabled is defined
     - hyprland_enabled
 
-- name: "Copy Hyprland user configuration for {{ username }}"
+- name: "Copy SOPS encrypted secret file"
   ansible.builtin.copy:
     src: "files/secrets/global.yaml"
     dest: "/etc/nixos/users/secrets/global.yaml"
