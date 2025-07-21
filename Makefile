@@ -17,3 +17,6 @@ ansible :
 
 switch :
 	nh os switch /etc/nixos
+
+dryrun :
+	ansible-playbook -i inventory main.yaml -DC
