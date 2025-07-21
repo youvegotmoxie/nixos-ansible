@@ -1,7 +1,7 @@
 #### Bootstrapping
-Get past the chicken egg problem of needing make and nh by using `nix-shell`
+Get past the chicken egg problem of needing make and nh by using ``
 ```bash
-$ nix-shell -p cmake -p nh --run "make all"
+$ nix-shell -p cmake -p nh -p home-manager --run "make all"
 ```
 
 
