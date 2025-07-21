@@ -8,6 +8,8 @@ nix-shell -p ssh-to-age --run "ssh-to-age -private-key -i ~/.ssh/sops_ed25519 > 
 nix-shell -p ssh-to-age --run "cat ~/.ssh/sops_ed25519.pub | ssh-to-age"
 ```
 
+_On macOS you may need to put `keys.txt` in `~/Library/Application\ Support/sops/age`_
+
 Create the SOPS encryption config `~/.sops.yaml`
 ```yaml
 keys:
