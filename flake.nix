@@ -20,6 +20,7 @@
               nh
               nixpkgs-fmt
               home-manager
+              ssh-to-age
             ];
           };
         });
