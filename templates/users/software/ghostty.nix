@@ -1,5 +1,4 @@
 {
-
   # Configure Ghostty
   programs.ghostty = {
     enable = true;
@@ -21,5 +20,4 @@
       quit-after-last-window-closed = true;
     };
   };
-
 }

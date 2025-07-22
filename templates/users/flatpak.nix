@@ -1,5 +1,4 @@
 {
-
   services.flatpak.uninstallUnmanaged = true;
   services.flatpak.update.auto.enable = true;
 

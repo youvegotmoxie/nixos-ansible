@@ -1,5 +1,4 @@
 {
-
   # Configure btop
   programs.btop = {
     enable = true;
@@ -51,5 +50,4 @@
       '';
     };
   };
-
 }

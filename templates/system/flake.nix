@@ -16,16 +16,21 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, nix-flatpak, sops-nix, ...}@inputs:
-    let
-     system = "x86_64-linux";
-    in
-    {
+  outputs = {
+    self,
+    nixpkgs,
+    home-manager,
+    nix-flatpak,
+    sops-nix,
+    ...
+  } @ inputs: let
+    system = "x86_64-linux";
+  in {
     nixosConfigurations = {
       snafu-nixos = nixpkgs.lib.nixosSystem {
         inherit system;
         modules = [
-           # Import the main module
+          # Import the main module
           ./configuration.nix
           nix-flatpak.nixosModules.nix-flatpak
           sops-nix.nixosModules.sops
@@ -36,7 +41,7 @@
             # Move conflicting files out of the way instead of crashing home-manager
             home-manager.backupFileExtension = "hmback";
             home-manager.extraSpecialArgs.flake-inputs = inputs;
-            home-manager.users.{{ username }}.home.stateVersion = "25.05";
+            home-manager.users."{{ username }}".home.stateVersion = "25.05";
             # Use Home Manager to manage Flatpaks
             home-manager.users."{{ username }}".imports = [
               # Add sops-nix support for home-manager
@@ -49,7 +54,7 @@
             ];
           }
         ];
-        specialArgs = { inherit inputs; };
+        specialArgs = {inherit inputs;};
       };
     };
   };

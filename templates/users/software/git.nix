@@ -1,5 +1,4 @@
 {
-
   # Configure Git for the user
   programs.git = {
     enable = true;
@@ -44,5 +43,4 @@
       };
     };
   };
-
 }

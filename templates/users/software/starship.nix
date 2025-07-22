@@ -1,5 +1,4 @@
 {
-
   # Configure Starship prompt
   programs.starship = {
     enable = true;
@@ -53,5 +52,4 @@
       };
     };
   };
-
 }

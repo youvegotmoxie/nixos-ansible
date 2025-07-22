@@ -9,22 +9,23 @@
     inputs.systems.follows = "systems";
   };
 
-  outputs =
-    { nixpkgs, flake-utils, ... }:
+  outputs = {
+    nixpkgs,
+    flake-utils,
+    ...
+  }:
     flake-utils.lib.eachDefaultSystem (
-      system:
-      let
+      system: let
         pkgs = nixpkgs.legacyPackages.${system};
-      in
-      {
+      in {
         devShells.default = pkgs.mkShell {
           packages = with pkgs; [
             cmake
             home-manager
             nh
-            nixfmt-tree
             sops
             ssh-to-age
+            alejandra
           ];
         };
       }
