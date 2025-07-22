@@ -21,6 +21,7 @@
       cat = "bat --paging=never --style=plain";
       gcm = "git checkout master";
       gpm = "git pull origin master";
+      grep = "ugrep";
     };
     bashrcExtra = ''
       if [[ $- != *i* ]] ; then

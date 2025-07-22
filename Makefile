@@ -3,13 +3,13 @@ all :
 	ansible-playbook -i inventory main.yaml -D
 	nixpkgs-fmt /etc/nixos
 	git -C /etc/nixos add .
-	git -C /etc/nixos commit -m 'updates'
+	git -C /etc/nixos commit -m '[nixos-ansible]'
 	nh os switch /etc/nixos
 	git -C /etc/nixos push origin master
 
 git :
 	git -C /etc/nixos add .
-	git -C /etc/nixos commit -m 'updates'
+	git -C /etc/nixos commit -m '[nixos-ansible]'
 	git -C /etc/nixos push origin master
 
 ansible :

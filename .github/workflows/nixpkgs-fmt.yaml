@@ -1,6 +1,0 @@
----
-name: nixpkgs-fmt
-on: [push]
-jobs:
-  lint-nix-files:
-    runs-on: nixos
