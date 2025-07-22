@@ -61,9 +61,6 @@
     group: "{{ username }}"
   loop:
     - gnome
-  when:
-    - gnome_enabled is defined
-    - gnome_enabled
 
 - name: "Copy Hyprland NixOS configuration"
   ansible.builtin.template:
@@ -74,9 +71,6 @@
     group: "{{ username }}"
   loop:
     - hyprland
-  when:
-    - hyprland_enabled is defined
-    - hyprland_enabled
 
 - name: "Copy Hyprland user configuration for {{ username }}"
   ansible.builtin.copy:
