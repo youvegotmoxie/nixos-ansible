@@ -37,7 +37,7 @@ gh_token: your-github-token
 #### Bootstrapping
 Get past the chicken egg problem of needing make and nh by using
 ```bash
-nix-shell -p cmake -p nh -p home-manager --run "make all"
+nix-shell -p cmake nh --run "make all"
 ```
 
 Alternatively you can use `nix develop` to create an environment with those tools installed
