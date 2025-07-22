@@ -1,12 +1,12 @@
-{ config, lib, pkgs, ... }:
+{ lib, pkgs, ... }:
 
 {
 
   # Create user's main group
-  users.groups.{{ username }} = { };
+  users.groups."{{ username }}" = { };
 
   # Create user
-  users.users.{{ username }} = {
+  users.users."{{ username }}" = {
     isNormalUser = true;
     group        = "{{ username }}";
     extraGroups  = [ "wheel" "users" "qemu-libvirtd" "docker" ];
@@ -53,8 +53,8 @@
     enableOnBoot = true;
     storageDriver = "btrfs";
     rootless = {
-      enable = true;
-      setSocketVariable = true;
+      enable = false;
+      setSocketVariable = false;
     };
   };
 
