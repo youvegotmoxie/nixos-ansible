@@ -73,7 +73,7 @@ in
   };
 
   # Do this instead of setting up Chezmoi
-  home.file.".pre-commit.yaml".text = ''
+  home.file.".pre-commit-config.yaml".text = ''
     # See https://pre-commit.com for more information
     # See https://pre-commit.com/hooks.html for more hooks
     repos:
