@@ -14,7 +14,7 @@
 
 - name: "Copy main NixOS configuration"
   ansible.builtin.template:
-    src: templates/system/{{ item.src }}.nix.j2
+    src: templates/system/{{ item.src }}.nix
     dest: "{{ item.dest }}"
     mode: '0644'
     owner: "{{ username }}"
@@ -26,7 +26,7 @@
 
 - name: "Copy user NixOS configuration"
   ansible.builtin.template:
-    src: templates/users/{{ item.src }}.nix.j2
+    src: templates/users/{{ item.src }}.nix
     dest: "{{ item.dest }}"
     mode: '0644'
     owner: "{{ username }}"
@@ -38,7 +38,7 @@
 
 - name: "Copy user NixOS home-manager software configuration(s)"
   ansible.builtin.template:
-    src: templates/users/software/{{ item }}.nix.j2
+    src: templates/users/software/{{ item }}.nix
     dest: /etc/nixos/users/{{ username }}/software/{{ item }}.nix
     mode: '0644'
     owner: "{{ username }}"
@@ -54,7 +54,7 @@
 
 - name: "Copy Gnome environment NixOS configuration"
   ansible.builtin.template:
-    src: templates/desktop/gnome/{{ item }}.nix.j2
+    src: templates/desktop/gnome/{{ item }}.nix
     dest: /etc/nixos/desktop/{{ item }}.nix
     mode: '0644'
     owner: "{{ username }}"
@@ -67,7 +67,7 @@
 
 - name: "Copy Hyprland NixOS configuration"
   ansible.builtin.template:
-    src: templates/desktop/hypr/{{ item }}.nix.j2
+    src: templates/desktop/hypr/{{ item }}.nix
     dest: /etc/nixos/desktop/{{ item }}.nix
     mode: '0644'
     owner: "{{ username }}"

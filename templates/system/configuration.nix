@@ -7,6 +7,7 @@
       ./hardware-configuration.nix
       ./users/mike.nix
       ./system/filesystems.nix
+# TODO: do this the nix way with mkOption
 {% if gnome_enabled is defined and gnome_enabled %}
       ./desktop/gnome.nix
 {% endif %}

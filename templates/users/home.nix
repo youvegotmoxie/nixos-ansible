@@ -1,10 +1,8 @@
-{ pkgs, ...}:
+{ pkgs, ... }:
 
-let
-  restic_passwd_path = "/backups/{{ hostname }}/password.txt";
-in
+let restic_passwd_path = "/backups/{{ hostname }}/password.txt";
 
-{
+in {
 
   # Per-application NixOS configuration
   imports = [
@@ -26,17 +24,13 @@ in
   sops = {
     age = {
       keyFile = "/home/{{ username }}/.config/sops/age/keys.txt";
-      sshKeyPaths = [
-        "/home/{{ username }}/.ssh/sops_ed25519"
-      ];
+      sshKeyPaths = [ "/home/{{ username }}/.ssh/sops_ed25519" ];
     };
     # Relative to home.nix config file: /etc/nixos/users/secrets/global.yaml
     defaultSopsFile = ./secrets/global.yaml;
   };
 
-  sops.secrets.restic_password = {
-    path = "${restic_passwd_path}";
-  };
+  sops.secrets.restic_password = { path = "${restic_passwd_path}"; };
 
   # Configure home-manager
   programs.home-manager.enable = true;
@@ -54,22 +48,14 @@ in
         "/home/{{ username }}/.local/share/docker"
       ];
       passwordFile = "${restic_passwd_path}";
-      pruneOpts = [
-        "--keep-daily 3"
-        "--keep-weekly 2"
-        "--keep-monthly 1"
-      ];
-      paths = [
-        "/home/{{ username }}"
-      ];
+      pruneOpts = [ "--keep-daily 3" "--keep-weekly 2" "--keep-monthly 1" ];
+      paths = [ "/home/{{ username }}" ];
       repository = "/backups/{{ hostname }}";
       timerConfig = {
         OnCalendar = "daily";
         RandomizedDelaySec = "1h";
       };
-      extraBackupArgs = [
-        "--cleanup-cache"
-      ];
+      extraBackupArgs = [ "--cleanup-cache" ];
     };
   };
 
@@ -111,7 +97,6 @@ in
       hooks:
       - id: terraform-validate
   '';
-
 
   # Set EDITOR to nvim
   programs.neovim = {
