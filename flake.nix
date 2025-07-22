@@ -1,5 +1,5 @@
 {
-  description = "nixos-ansible bootstrapping tools";
+  description = "nixos-ansible tools";
 
   inputs.nixpkgs.url = "nixpkgs/nixos-unstable";
 
@@ -15,11 +15,11 @@
         {
           default = pkgs.mkShell {
             packages = with pkgs; [
-              sops
               cmake
+              home-manager
               nh
               nixpkgs-fmt
-              home-manager
+              sops
               ssh-to-age
             ];
           };
