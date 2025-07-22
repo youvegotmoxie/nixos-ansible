@@ -8,13 +8,13 @@ in
 
   # Per-application NixOS configuration
   imports = [
-    ./atuin.nix
-    ./bash.nix
-    ./btop.nix
-    ./ghostty.nix
-    ./git.nix
-    ./starship.nix
-    ./zoxide.nix
+    ./software/atuin.nix
+    ./software/bash.nix
+    ./software/btop.nix
+    ./software/ghostty.nix
+    ./software/git.nix
+    ./software/starship.nix
+    ./software/zoxide.nix
   ];
 
   # Set home defaults
