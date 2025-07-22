@@ -10,6 +10,10 @@
     ./desktop/hyprland.nix
   ];
 
+  # Configure which DE to use
+  hypr.enable = false;
+  gnome.enable = true;
+
   # Bootloader and kernel configuration
   boot = {
     tmp.useTmpfs = true;

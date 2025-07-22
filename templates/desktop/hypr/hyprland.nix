@@ -7,13 +7,10 @@
 }: let
   cfg = config.hypr;
 in {
-  options.hypr = {
-    enable = lib.mkEnableOption "hypr";
-    type = lib.mkOption {
-      description = "true/false";
-      type = lib.types.bool;
-    };
+  options.hypr.enable = lib.mkOption {
     default = false;
+    type = lib.types.bool;
+    description = "Enable or disable Hyprland";
   };
   config = lib.mkIf cfg.enable {
     # Install Hyprland

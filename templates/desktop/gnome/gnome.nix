@@ -8,6 +8,8 @@
 in {
   options.gnome.enable = lib.mkOption {
     default = true;
+    type = lib.types.bool;
+    description = "Enable or disable Gnome";
   };
   config = lib.mkIf cfg.enable {
     services.desktopManager.gnome.enable = true;
