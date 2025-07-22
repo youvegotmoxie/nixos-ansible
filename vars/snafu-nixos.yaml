@@ -5,3 +5,5 @@ username: 'mike'
 gnome_enabled: true
 git_user: 'MikeB'
 git_email: 'youvegotmoxie@gmail.com'
+backup_drive_uuid: '2da4ca3c-5cfa-4759-8d64-de5f553e16e7'
+enable_backup_drive: true

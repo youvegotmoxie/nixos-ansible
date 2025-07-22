@@ -20,3 +20,9 @@ switch :
 
 dryrun :
 	ansible-playbook -i inventory main.yaml -DC
+
+test :
+	ansible-playbook -i inventory main.yaml -D
+	nixpkgs-fmt /etc/nixos
+	git -C /etc/nixos add .
+	nh os switch -n /etc/nixos

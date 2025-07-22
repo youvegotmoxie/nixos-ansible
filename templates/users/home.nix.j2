@@ -1,7 +1,7 @@
 { pkgs, ...}:
 
 let
-  restic_passwd_path = "/opt/backups/password.txt";
+  restic_passwd_path = "/backups/{{ hostname }}/password.txt";
 in
 
 {
@@ -50,6 +50,7 @@ in
         "/home/{{ username }}/Downloads"
         "/home/{{ username }}/.cache"
         "/home/{{ username }}/.local/share/gnome-boxes"
+        "/home/{{ username }}/.local/share/docker"
       ];
       passwordFile = "${restic_passwd_path}";
       pruneOpts = [
@@ -60,7 +61,7 @@ in
       paths = [
         "/home/{{ username }}"
       ];
-      repository = "/opt/backups";
+      repository = "/backups/{{ hostname }}";
       timerConfig = {
         OnCalendar = "daily";
         RandomizedDelaySec = "1h";
