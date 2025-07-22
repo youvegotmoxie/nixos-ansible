@@ -1,5 +1,3 @@
-{ lib, ... }:
-
 {
 
   services.flatpak.uninstallUnmanaged = true;

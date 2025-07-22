@@ -1,5 +1,3 @@
-{ config, lib, pkgs, ... }:
-
 {
   # Mount NVMe to /home
   fileSystems."/home" = {
