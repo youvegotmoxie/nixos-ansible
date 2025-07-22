@@ -87,7 +87,7 @@ in
       hooks:
       - id: autopep8
     - repo: https://github.com/gitleaks/gitleaks.git
-      rev: 'v8.26.0'
+      rev: 'v8.28.0'
       hooks:
       - id: gitleaks
     - repo: https://github.com/koalaman/shellcheck-precommit
@@ -105,9 +105,10 @@ in
         - --ignore=DL3018 # Ignore not pinning all software package versions (apk)
         - --ignore=SC1091 # Ignore missing shellcheck mock files
     - repo: https://github.com/gruntwork-io/pre-commit
-      rev: 'v0.1.29'
+      rev: 'v0.1.30'
       hooks:
-      - id: terraform-validate'';
+      - id: terraform-validate
+  '';
 
 
   # Set EDITOR to nvim
