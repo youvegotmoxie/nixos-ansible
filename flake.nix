@@ -22,7 +22,7 @@
             cmake
             home-manager
             nh
-            nixpkgs-fmt
+            nixfmt-tree
             sops
             ssh-to-age
           ];

@@ -1,7 +1,6 @@
 
 all :
 	ansible-playbook -i inventory main.yaml -D
-	nixpkgs-fmt /etc/nixos
 	git -C /etc/nixos add .
 	git -C /etc/nixos commit -m '[nixos-ansible]'
 	nh os switch /etc/nixos
@@ -23,6 +22,5 @@ dryrun :
 
 test :
 	ansible-playbook -i inventory main.yaml -D
-	nixpkgs-fmt /etc/nixos
 	git -C /etc/nixos add .
 	nh os switch -n /etc/nixos
