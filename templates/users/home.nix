@@ -35,7 +35,20 @@ in {
   # Configure backups
   services.restic.enable = true;
   services.restic.backups = {
-    localbackup = {
+    "etc_nixos" = {
+      initialize = true;
+      passwordFile = "${restic_passwd_path}";
+      pruneOpts = ["--keep-hourly 6" "--keep-daily 7" "--keep-weekly 4" "--keep-monthly 12"];
+      paths = ["/etc/nixos"];
+      repository = "/backups/{{ hostname }}/etc_nixos";
+      timerConfig = {
+        OnCalendar = "hourly";
+        RandomizedDelaySec = "10m";
+      };
+      extraBackupArgs = ["--cleanup-cache"];
+    };
+    "home_{{ username }}" = {
+      initialize = true;
       exclude = [
         "/home/{{ username }}/.local/share/Steam"
         "/home/{{ username }}/Downloads"
@@ -47,7 +60,7 @@ in {
       passwordFile = "${restic_passwd_path}";
       pruneOpts = ["--keep-daily 3" "--keep-weekly 2" "--keep-monthly 1"];
       paths = ["/home/{{ username }}"];
-      repository = "/backups/{{ hostname }}";
+      repository = "/backups/{{ hostname }}/{{ username }}";
       timerConfig = {
         OnCalendar = "daily";
         RandomizedDelaySec = "1h";
