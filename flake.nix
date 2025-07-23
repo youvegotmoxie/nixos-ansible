@@ -101,6 +101,7 @@
             cmake
             home-manager
             nh
+            pre-commit
             sops
             ssh-to-age
             alejandra

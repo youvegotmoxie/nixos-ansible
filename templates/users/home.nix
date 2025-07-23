@@ -141,7 +141,6 @@ in {
     lazydocker
     lazygit
     nodejs
-    pre-commit
     ripgrep
     starship
     tree
