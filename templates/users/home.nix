@@ -56,6 +56,17 @@ in {
     };
   };
 
+  # Add public key and rules config
+  home.file.".sops.yaml".text = ''
+    keys:
+      - &{{ username }} age1w2szqkpqpurah7sc88xx0z3j2m068w6gryh6qh2vvpd5s9rd8uusppwsjr
+    creation_rules:
+      - path_regex: secrets/[^/]+\.(yaml|json|env|ini)$
+        key_groups:
+          - pgp:
+            age:
+            - *{{ username }}'';
+
   # Do this instead of setting up Chezmoi
   home.file.".pre-commit-config.yaml".text = ''
     # See https://pre-commit.com for more information

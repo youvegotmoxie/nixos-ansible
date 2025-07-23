@@ -11,6 +11,9 @@ nix-shell -p ssh-to-age --run "cat ~/.ssh/sops_ed25519.pub | ssh-to-age"
 _On macOS you may need to put `keys.txt` in `~/Library/Application\ Support/sops/age`_
 
 Create the SOPS encryption config `~/.sops.yaml`
+Update `./users/$username/home.nix` with your key
+We do both, once for the initial bootstrap and then to let home-manager manage the file
+Afterwards you can delete the `~/.sops.yaml.hmback` file if you would like
 ```yaml
 keys:
   - &username $output-from-ssh-to-age-sops_ed25519.pub
@@ -20,7 +23,6 @@ creation_rules:
       - pgp:
         age:
         - *username
-
 ```
 
 Create the secrets file `files/secrets/global.yaml` with sops
@@ -40,7 +42,7 @@ Get past the chicken egg problem of needing make and nh by using
 nix-shell -p cmake -p nh -p home-manager --run "make all"
 ```
 
-Alternatively you can use `nix develop` to create an environment with those tools installed
+Alternatively you can use `nix develop` to create an environment with those tools installed (enable flakes)
 This will use what's defined in `flake.nix`
 ```bash
 nix develop
