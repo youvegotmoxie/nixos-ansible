@@ -26,6 +26,9 @@
       efi.canTouchEfiVariables = true;
       timeout = 2;
     };
+    initrd.availableKernelModules = [
+      "zram"
+    ];
   };
 
   # Set hostname and configure networking
