@@ -89,14 +89,11 @@
   # Globally installed packages
   environment.systemPackages = with pkgs; [
     clang
-    git
     lsb-release
-    nh
     pinentry-curses
     restic
     rocmPackages.rocm-smi
     sops
-    unzip
     vim
     wget
   ];

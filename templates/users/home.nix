@@ -146,17 +146,20 @@ in {
     fd
     gh
     ghostty
+    git
     go
     jdk21_headless
     jq
     lazydocker
     lazygit
+    nh
     nodejs
     python313
     ripgrep
     starship
     tree
     ugrep
+    unzip
     uv
     viddy
     yq
