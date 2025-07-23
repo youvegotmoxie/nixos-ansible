@@ -1,2 +1,3 @@
 .ansible
 .direnv
+.pre-commit-config.yaml
