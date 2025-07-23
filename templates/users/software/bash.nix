@@ -29,11 +29,6 @@
       # Enable VIM keybinds
       set -o vi
 
-      # If a Python venv exists then activate it
-      if [ -d $HOME/.venv ]; then
-          source ~/.venv/bin/activate
-      fi
-
       # Add SSH key to ssh-agent
       eval "$(ssh-agent -s)"
       ssh-add /home/{{ username }}/.ssh/id_rsa
