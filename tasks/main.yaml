@@ -22,6 +22,7 @@
   loop:
     - { src: 'configuration', dest: '/etc/nixos/configuration.nix' }
     - { src: 'filesystems', dest: '/etc/nixos/system/filesystems.nix' }
+    - { src: 'backup', dest: '/etc/nixos/system/backup.nix' }
     - { src: 'flake', dest: '/etc/nixos/flake.nix' }
 
 - name: "Copy user NixOS configuration"

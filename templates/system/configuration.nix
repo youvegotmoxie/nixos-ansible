@@ -4,15 +4,18 @@
     ./hardware-configuration.nix
     ./users/mike.nix
     ./system/filesystems.nix
-    # Default
+    ./system/backup.nix
     ./desktop/gnome.nix
-    # Disabled by default
     ./desktop/hyprland.nix
   ];
 
-  # Configure which DE to use
-  hypr.enable = false;
+  ## BEGIN Custom modules ##
+  # Configure which DE(s) to use
   gnome.enable = true;
+  hypr.enable = false;
+  # Configure a separate mount for backups
+  backupDrive.enable = true;
+  ## END Custom modules ##
 
   # Bootloader and kernel configuration
   boot = {

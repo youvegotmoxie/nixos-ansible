@@ -5,18 +5,8 @@
     fsType = "btrfs";
     options = ["compress=lzo"];
   };
-
   # Redefine / here so we can turn on compression
   fileSystems."/" = {
     options = ["compress=lzo"];
   };
-
-# TODO: Nixify this with an option
-{% if backup_drive_uuid is defined and enable_backup_drive == True %}
-  fileSystems."/backups" = {
-    device = "/dev/disk/by-uuid/{{ backup_drive_uuid }}";
-    fsType = "ext4";
-    options = ["noatime" "defaults"];
-  };
-{% endif %}
 }
