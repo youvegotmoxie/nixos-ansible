@@ -8,3 +8,4 @@ ansible_become_user=root
 ansible_user=mike
 ansible_connection=ssh
 ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+ansible_python_interpreter='python3'

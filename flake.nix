@@ -98,13 +98,15 @@
               inherit pkgs config;
             }).shellHook;
           packages = with pkgs; [
+            alejandra
+            ansible
+            ansible-lint
             cmake
             home-manager
             nh
             pre-commit
             sops
             ssh-to-age
-            alejandra
           ];
         };
       }

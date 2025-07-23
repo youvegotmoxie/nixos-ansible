@@ -19,7 +19,7 @@
 
   # Bootloader and kernel configuration
   boot = {
-    tmp.useTmpfs = true;
+    tmp.useZram = true;
     kernelPackages = pkgs.linuxPackages_latest;
     loader = {
       systemd-boot.enable = true;
@@ -88,13 +88,10 @@
 
   # Globally installed packages
   environment.systemPackages = with pkgs; [
-    btop
     clang
     git
-    home-manager
     lsb-release
     nh
-    python3
     pinentry-curses
     restic
     rocmPackages.rocm-smi
@@ -139,6 +136,12 @@
   hardware = {
     bluetooth.enable = true;
     xone.enable = true;
+  };
+
+  # Configure zram swap
+  zramSwap = {
+    enable = true;
+    memoryPercent = 35;
   };
 
   # Let Nix manage Nix
