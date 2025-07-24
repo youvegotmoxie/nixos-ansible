@@ -30,6 +30,7 @@
     ...
   } @ inputs: let
     system = "x86_64-linux";
+    comin_path = "/backups/{{ hostname }}/gh_token";
   in {
     nixosConfigurations = {
       snafu-nixos = nixpkgs.lib.nixosSystem {
@@ -47,14 +48,20 @@
               keyFile = "/home/{{ username }}/.config/sops/age/keys.txt";
               sshKeyPaths = ["/home/{{ username }}/.ssh/sops_ed25519"];
             };
+            # Relative to home.nix config file: /etc/nixos/users/secrets/global.yaml
           };
+            sops.defaultSopsFile = ./users/mike/secrets/global.yaml;
+            sops.secrets.gh_token = {
+              path = "${comin_path}";
+            };
             services.comin = {
               enable = true;
               remotes = [{
-                name = "local-repo";
-                url = "/etc/nixos";
+                name = "nixos-configuration";
+                url = "https://github.com/youvegotmoxie/nixos-configuration.git";
                 branches.main.name = "master";
-                poller.period = 2;
+                auth.access_token_path = "${comin_path}";
+                poller.period = 300;
               }];
             };
             home-manager.useGlobalPkgs = true;
