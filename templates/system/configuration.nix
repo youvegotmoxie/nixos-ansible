@@ -88,7 +88,6 @@
 
   # Globally installed packages
   environment.systemPackages = with pkgs; [
-    clang
     lsb-release
     pinentry-curses
     restic
