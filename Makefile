@@ -24,3 +24,14 @@ test :
 	ansible-playbook -i inventory main.yaml -D
 	git -C /etc/nixos add .
 	nh os switch -n /etc/nixos
+
+comin_local :
+	ansible-playbook -i inventory main.yaml -D
+	git -C /etc/nixos add .
+	git -C /etc/nixos commit -m '[nixos-ansible] commit from automation'
+
+comin_full :
+	ansible-playbook -i inventory main.yaml -D
+	git -C /etc/nixos add .
+	git -C /etc/nixos commit -m '[nixos-ansible] commit from automation'
+	git -C /etc/nixos push origin master

@@ -14,10 +14,15 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    comin = {
+      url = "github:nlewo/comin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
     self,
+    comin,
     nixpkgs,
     home-manager,
     nix-flatpak,
@@ -35,7 +40,23 @@
           nix-flatpak.nixosModules.nix-flatpak
           sops-nix.nixosModules.sops
           home-manager.nixosModules.home-manager
+          comin.nixosModules.comin
           {
+          sops = {
+            age = {
+              keyFile = "/home/{{ username }}/.config/sops/age/keys.txt";
+              sshKeyPaths = ["/home/{{ username }}/.ssh/sops_ed25519"];
+            };
+          };
+            services.comin = {
+              enable = true;
+              remotes = [{
+                name = "local-repo";
+                url = "/etc/nixos";
+                branches.main.name = "master";
+                poller.period = 2;
+              }];
+            };
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             # Move conflicting files out of the way instead of crashing home-manager
