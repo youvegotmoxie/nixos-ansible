@@ -58,10 +58,10 @@
               enable = true;
               remotes = [{
                 name = "nixos-configuration";
-                url = "https://github.com/youvegotmoxie/nixos-configuration.git";
+                url = "/etc/nixos";
                 branches.main.name = "master";
                 auth.access_token_path = "${comin_path}";
-                poller.period = 300;
+                poller.period = 30;
               }];
             };
             home-manager.useGlobalPkgs = true;
