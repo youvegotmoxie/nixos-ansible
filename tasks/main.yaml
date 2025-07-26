@@ -1,6 +1,6 @@
 - name: "Create NixOS config dirs"
   ansible.builtin.file:
-    path: "/etc/nixos/{{ item }}"
+    path: "/home/mike/sync/git/nixos/nixos-configuration/{{ item }}"
     state: directory
     mode: '0755'
     owner: "{{ username }}"
@@ -20,10 +20,10 @@
     owner: "{{ username }}"
     group: "{{ username }}"
   loop:
-    - { src: 'configuration', dest: '/etc/nixos/configuration.nix' }
-    - { src: 'filesystems', dest: '/etc/nixos/system/filesystems.nix' }
-    - { src: 'backup', dest: '/etc/nixos/system/backup.nix' }
-    - { src: 'flake', dest: '/etc/nixos/flake.nix' }
+    - { src: 'configuration', dest: '/home/mike/sync/git/nixos/nixos-configuration/configuration.nix' }
+    - { src: 'filesystems', dest: '/home/mike/sync/git/nixos/nixos-configuration/system/filesystems.nix' }
+    - { src: 'backup', dest: '/home/mike/sync/git/nixos/nixos-configuration/system/backup.nix' }
+    - { src: 'flake', dest: '/home/mike/sync/git/nixos/nixos-configuration/flake.nix' }
 
 - name: "Copy user NixOS configuration"
   ansible.builtin.template:
@@ -33,14 +33,14 @@
     owner: "{{ username }}"
     group: "{{ username }}"
   loop:
-    - { src: "{{ username }}", dest: "/etc/nixos/users/{{ username }}.nix" }
-    - { src: 'flatpak', dest: "/etc/nixos/users/{{ username }}/software/flatpak.nix" }
-    - { src: 'home', dest: "/etc/nixos/users/{{ username }}/home.nix" }
+    - { src: "{{ username }}", dest: "/home/mike/sync/git/nixos/nixos-configuration/users/{{ username }}.nix" }
+    - { src: 'flatpak', dest: "/home/mike/sync/git/nixos/nixos-configuration/users/{{ username }}/software/flatpak.nix" }
+    - { src: 'home', dest: "/home/mike/sync/git/nixos/nixos-configuration/users/{{ username }}/home.nix" }
 
 - name: "Copy user NixOS home-manager software configuration(s)"
   ansible.builtin.template:
     src: templates/users/software/{{ item }}.nix
-    dest: /etc/nixos/users/{{ username }}/software/{{ item }}.nix
+    dest: /home/mike/sync/git/nixos/nixos-configuration/users/{{ username }}/software/{{ item }}.nix
     mode: '0644'
     owner: "{{ username }}"
     group: "{{ username }}"
@@ -56,7 +56,7 @@
 - name: "Copy Gnome environment NixOS configuration"
   ansible.builtin.template:
     src: templates/desktop/gnome/{{ item }}.nix
-    dest: /etc/nixos/desktop/{{ item }}.nix
+    dest: /home/mike/sync/git/nixos/nixos-configuration/desktop/{{ item }}.nix
     mode: '0644'
     owner: "{{ username }}"
     group: "{{ username }}"
@@ -66,7 +66,7 @@
 - name: "Copy Hyprland NixOS configuration"
   ansible.builtin.template:
     src: templates/desktop/hypr/{{ item }}.nix
-    dest: /etc/nixos/desktop/{{ item }}.nix
+    dest: /home/mike/sync/git/nixos/nixos-configuration/desktop/{{ item }}.nix
     mode: '0644'
     owner: "{{ username }}"
     group: "{{ username }}"
@@ -91,7 +91,7 @@
 - name: "Copy SOPS encrypted secret file"
   ansible.builtin.copy:
     src: "files/secrets/global.yaml"
-    dest: "/etc/nixos/users/{{ username }}/secrets/global.yaml"
+    dest: "/home/mike/sync/git/nixos/nixos-configuration/users/{{ username }}/secrets/global.yaml"
     mode: '0600'
     owner: "{{ username }}"
     group: "{{ username }}"
