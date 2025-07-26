@@ -1,8 +1,4 @@
-{
-  pkgs,
-  config,
-  ...
-}: let
+{pkgs, ...}: let
   restic_passwd_path = "/backups/{{ hostname }}/password.txt";
 in {
   # Per-application NixOS configuration
@@ -35,7 +31,6 @@ in {
 
   # Setup secrets
   sops.secrets.restic_password = {path = "${restic_passwd_path}";};
-
   # Configure home-manager
   programs.home-manager.enable = true;
 
@@ -78,6 +73,7 @@ in {
 
   home.file.".var/app/org.squidowl.halloy/config/halloy/config.toml".text = ''
     [servers.liberachat]
+    # shit
     nickname = "youvegotmoxie"
     server = "irc.libera.chat"
     channels = ["#halloy", "#nixos", "#python", "#linux", "#politics"]
@@ -85,7 +81,7 @@ in {
     [buffer.channel.topic]
     enabled = true
 
-    [sidebar]
+    [actions.sidebar]
     buffer = "replace-pane"
 
     [actions.buffer]
