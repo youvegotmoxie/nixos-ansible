@@ -1,4 +1,8 @@
-{pkgs, ...}: let
+{
+  pkgs,
+  config,
+  ...
+}: let
   restic_passwd_path = "/backups/{{ hostname }}/password.txt";
 in {
   # Per-application NixOS configuration
@@ -19,6 +23,7 @@ in {
 
   # Configure sops
   # TODO: Ansible the manual setup portion of this
+  # TODO: Use sops-nix template placeholder feature for seeding secrets
   sops = {
     age = {
       keyFile = "/home/{{ username }}/.config/sops/age/keys.txt";
@@ -28,6 +33,7 @@ in {
     defaultSopsFile = ./secrets/global.yaml;
   };
 
+  # Setup secrets
   sops.secrets.restic_password = {path = "${restic_passwd_path}";};
 
   # Configure home-manager
@@ -70,14 +76,21 @@ in {
     };
   };
 
-  home.file.".config/halloy/config.toml".text = ''
+  home.file.".var/app/org.squidowl.halloy/config/halloy/config.toml".text = ''
     [servers.liberachat]
-    nickname = "moxie"
+    nickname = "youvegotmoxie"
     server = "irc.libera.chat"
-    channels = ["#halloy"]
+    channels = ["#halloy", "#nixos", "#python", "#linux", "#politics"]
 
     [buffer.channel.topic]
     enabled = true
+
+    [sidebar]
+    buffer = "replace-pane"
+
+    [actions.buffer]
+    click_channel_name = "replace-pane"
+    click_username = "replace-pane"
   '';
 
   # Add public key and rules config
