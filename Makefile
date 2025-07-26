@@ -1,4 +1,3 @@
-
 all :
 	ansible-playbook -i inventory main.yaml -D
 	git -C /home/mike/sync/git/nixos/nixos-configuration add .
