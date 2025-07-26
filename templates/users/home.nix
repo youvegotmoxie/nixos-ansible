@@ -8,6 +8,7 @@ in {
     ./software/btop.nix
     ./software/ghostty.nix
     ./software/git.nix
+    ./software/halloy.nix
     ./software/starship.nix
     ./software/zoxide.nix
   ];
@@ -31,23 +32,6 @@ in {
 
   # Configure home-manager
   programs.home-manager.enable = true;
-
-  # Install and configure Halloy
-  programs.halloy = {
-    enable = true;
-    settings = {
-      "buffer.channel.topic" = {
-        enabled = true;
-      };
-      "servers.liberachat" = {
-        channels = [
-          "#halloy"
-        ];
-        nickname = "moxie";
-        server = "irc.libera.chat";
-      };
-    };
-  };
 
   # Configure backups
   services.restic.enable = true;
