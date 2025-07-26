@@ -70,6 +70,16 @@ in {
     };
   };
 
+  home.file.".config/halloy/config.toml".text = ''
+    [servers.liberachat]
+    nickname = "moxie"
+    server = "irc.libera.chat"
+    channels = ["#halloy"]
+
+    [buffer.channel.topic]
+    enabled = true
+  '';
+
   # Add public key and rules config
   home.file.".sops.yaml".text = ''
     keys:
