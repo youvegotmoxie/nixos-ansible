@@ -1,37 +1,9 @@
 
 all :
 	ansible-playbook -i inventory main.yaml -D
-	git -C /etc/nixos add .
-	git -C /etc/nixos commit -m '[nixos-ansible] commit from automation'
-	nh os switch /etc/nixos
-	git -C /etc/nixos push origin master
-
-git :
-	git -C /etc/nixos add .
-	git -C /etc/nixos commit -m '[nixos-ansible] commit from automation'
-	git -C /etc/nixos push origin master
-
-ansible :
-	ansible-playbook -i inventory main.yaml -D
-
-switch :
-	nh os switch /etc/nixos
+	git -C /home/mike/sync/git/nixos/nixos-configuration add .
+	git -C /home/mike/sync/git/nixos/nixos-configuration commit -m '[nixos-ansible] commit from automation'
+	git -C /home/mike/sync/git/nixos/nixos-configuration push origin master
 
 dryrun :
 	ansible-playbook -i inventory main.yaml -DC
-
-test :
-	ansible-playbook -i inventory main.yaml -D
-	git -C /etc/nixos add .
-	nh os switch -n /etc/nixos
-
-comin_local :
-	ansible-playbook -i inventory main.yaml -D
-	git -C /etc/nixos add .
-	git -C /etc/nixos commit -m '[nixos-ansible] commit from automation'
-
-comin_full :
-	ansible-playbook -i inventory main.yaml -D
-	git -C /etc/nixos add .
-	git -C /etc/nixos commit -m '[nixos-ansible] commit from automation'
-	git -C /etc/nixos push origin master
