@@ -25,6 +25,7 @@
       systemd-boot = {
         enable = true;
         configurationLimit = 3;
+        memtest86.enable = true;
       };
       efi.canTouchEfiVariables = true;
       timeout = 2;
