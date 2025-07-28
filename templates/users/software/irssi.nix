@@ -1,7 +1,7 @@
 {
   # Install and configure Irssi
   programs.irssi = {
-    enable = true;
+    enable = false;
     networks = {
       liberachat = {
         nick = "youvegotmoxie";

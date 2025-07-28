@@ -16,6 +16,7 @@ in {
   ];
 
   # Set home defaults
+  # TODO: Pull in the ${mainUser} config from flake.nix
   home.username = "{{ username }}";
   home.homeDirectory = "/home/{{ username }}";
 
