@@ -34,7 +34,6 @@
     group: "{{ username }}"
   loop:
     - { src: "{{ username }}", dest: "/home/mike/sync/git/nixos/nixos-configuration/users/{{ username }}.nix" }
-    - { src: 'flatpak', dest: "/home/mike/sync/git/nixos/nixos-configuration/users/{{ username }}/software/flatpak.nix" }
     - { src: 'home', dest: "/home/mike/sync/git/nixos/nixos-configuration/users/{{ username }}/home.nix" }
 
 - name: "Copy user NixOS home-manager software configuration(s)"
@@ -48,6 +47,7 @@
     - atuin
     - bash
     - btop
+    - flatpak
     - ghostty
     - git
     - halloy
