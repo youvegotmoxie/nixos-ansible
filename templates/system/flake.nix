@@ -27,11 +27,11 @@
     home-manager,
     nix-flatpak,
     sops-nix,
-    config,
     ...
   } @ inputs: let
     system = "x86_64-linux";
     comin_path = "/backups/{{ hostname }}/gh_token";
+    mainUser = "mike";
   in {
     nixosConfigurations = {
       snafu-nixos = nixpkgs.lib.nixosSystem {
@@ -80,9 +80,9 @@
               sops-nix.homeManagerModules.sops
               # Flatpak NixOS configuration
               nix-flatpak.homeManagerModules.nix-flatpak
-              ./users/${config.home.username}/software/flatpak.nix
+              ./users/${mainUser}/software/flatpak.nix
               # Main home-manager configuration
-              ./users/${config.home.username}/home.nix
+              ./users/${mainUser}/home.nix
             ];
           }
         ];
