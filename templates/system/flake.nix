@@ -55,7 +55,7 @@
               path = "${comin_path}";
             };
             services.comin = {
-              enable = true;
+              enable = false;
               remotes = [
                 {
                   name = "nixos-configuration";
