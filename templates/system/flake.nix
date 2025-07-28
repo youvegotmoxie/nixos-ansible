@@ -54,6 +54,7 @@
             sops.secrets.gh_token = {
               path = "${comin_path}";
             };
+            # Setup GitOps. Disabled for now due to excessive rebuilds
             services.comin = {
               enable = false;
               remotes = [

@@ -31,6 +31,7 @@
           "ll"
           "vi"
           "vim"
+          "nvim"
         ];
         common_subcommands = [
           "cargo"
@@ -45,6 +46,8 @@
           "k"
           "helm"
           "helm2"
+          "nix"
+          "nh"
         ];
       };
     };
