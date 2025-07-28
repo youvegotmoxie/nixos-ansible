@@ -73,23 +73,23 @@ in {
     };
   };
 
-  #home.file.".var/app/org.squidowl.halloy/config/halloy/config.toml".text = ''
-  #  [servers.liberachat]
-  #  # shit
-  #  nickname = "youvegotmoxie"
-  #  server = "irc.libera.chat"
-  #  channels = ["#halloy", "#nixos", "#python", "#linux", "#politics"]
+  home.file.".var/app/org.squidowl.halloy/config/halloy/config.toml".text = ''
+    [servers.liberachat]
+    # shit
+    nickname = "youvegotmoxie"
+    server = "irc.libera.chat"
+    channels = ["#nixos", "#python", "#linux", "#politics"]
 
-  #  [buffer.channel.topic]
-  #  enabled = true
+    [buffer.channel.topic]
+    enabled = true
 
-  #  [actions.sidebar]
-  #  buffer = "replace-pane"
+    [actions.sidebar]
+    buffer = "replace-pane"
 
-  #  [actions.buffer]
-  #  click_channel_name = "replace-pane"
-  #  click_username = "replace-pane"
-  #'';
+    [actions.buffer]
+    click_channel_name = "replace-pane"
+    click_username = "replace-pane"
+  '';
 
   # Add public key and rules config
   home.file.".sops.yaml".text = ''
