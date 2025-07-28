@@ -31,7 +31,7 @@
   } @ inputs: let
     system = "x86_64-linux";
     comin_path = "/backups/{{ hostname }}/gh_token";
-    mainUser = "mike";
+    mainUser = "{{ username }}";
   in {
     nixosConfigurations = {
       snafu-nixos = nixpkgs.lib.nixosSystem {
@@ -46,12 +46,12 @@
           {
             sops = {
               age = {
-                keyFile = "/home/{{ username }}/.config/sops/age/keys.txt";
-                sshKeyPaths = ["/home/{{ username }}/.ssh/sops_ed25519"];
+                keyFile = "/home/${mainUser}/.config/sops/age/keys.txt";
+                sshKeyPaths = ["/home/${mainUser}/.ssh/sops_ed25519"];
               };
               # Relative to home.nix config file: /etc/nixos/users/secrets/global.yaml
             };
-            sops.defaultSopsFile = ./users/mike/secrets/global.yaml;
+            sops.defaultSopsFile = ./users/${mainUser}/secrets/global.yaml;
             sops.secrets.gh_token = {
               path = "${comin_path}";
             };
@@ -73,17 +73,19 @@
             # Move conflicting files out of the way instead of crashing home-manager
             home-manager.backupFileExtension = "hmback";
             home-manager.extraSpecialArgs.flake-inputs = inputs;
-            home-manager.users."{{ username }}".home.stateVersion = "25.05";
-            # Use Home Manager to manage Flatpaks
-            home-manager.users."{{ username }}".imports = [
-              # Add sops-nix support for home-manager
-              sops-nix.homeManagerModules.sops
-              # Flatpak NixOS configuration
-              nix-flatpak.homeManagerModules.nix-flatpak
-              ./users/${mainUser}/software/flatpak.nix
-              # Main home-manager configuration
-              ./users/${mainUser}/home.nix
-            ];
+            home-manager.users."${mainUser}" = {
+              home.stateVersion = "25.05";
+              imports = [
+                # Add sops-nix support for home-manager
+                sops-nix.homeManagerModules.sops
+                # Flatpak NixOS configuration
+                nix-flatpak.homeManagerModules.nix-flatpak
+                # Use Home Manager to manage Flatpaks
+                ./users/${mainUser}/software/flatpak.nix
+                # Main home-manager configuration
+                ./users/${mainUser}/home.nix
+              ];
+            };
           }
         ];
         specialArgs = {inherit inputs;};

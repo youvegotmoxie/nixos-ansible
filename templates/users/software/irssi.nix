@@ -9,9 +9,6 @@
           address = "irc.libera.chat";
           port = 6697;
           autoConnect = true;
-          channels = {
-            halloy.autoJoin = true;
-          };
         };
       };
     };
