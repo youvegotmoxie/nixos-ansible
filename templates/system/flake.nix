@@ -27,6 +27,7 @@
     home-manager,
     nix-flatpak,
     sops-nix,
+    config,
     ...
   } @ inputs: let
     system = "x86_64-linux";
@@ -79,9 +80,9 @@
               sops-nix.homeManagerModules.sops
               # Flatpak NixOS configuration
               nix-flatpak.homeManagerModules.nix-flatpak
-              ./users/{{ username }}/software/flatpak.nix
+              ./users/${config.home.username}/software/flatpak.nix
               # Main home-manager configuration
-              ./users/{{ username }}/home.nix
+              ./users/${config.home.username}/home.nix
             ];
           }
         ];

@@ -2,6 +2,7 @@
   restic_passwd_path = "/backups/{{ hostname }}/password.txt";
 in {
   # Per-application NixOS configuration
+  # Flatpak is imported in flake.nix
   imports = [
     ./software/atuin.nix
     ./software/bash.nix
@@ -9,6 +10,7 @@ in {
     ./software/ghostty.nix
     ./software/git.nix
     ./software/halloy.nix
+    ./software/irssi.nix
     ./software/starship.nix
     ./software/zoxide.nix
   ];
