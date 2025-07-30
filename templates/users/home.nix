@@ -76,7 +76,7 @@ in {
 
   home.file.".var/app/org.squidowl.halloy/config/halloy/config.toml".text = ''
     [servers.liberachat]
-    nickname = "youvegotmoxie"
+    nickname = "moxie-_-"
     server = "irc.libera.chat"
     channels = ["#nixos", "#python", "#linux", "##politics", "#networking", "##programming", "#hardware", "##chat", "#docker", "#neovim", "#kubernetes"]
 

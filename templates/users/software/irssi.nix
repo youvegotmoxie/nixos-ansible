@@ -4,7 +4,7 @@
     enable = false;
     networks = {
       liberachat = {
-        nick = "youvegotmoxie";
+        nick = "moxie-_-";
         server = {
           address = "irc.libera.chat";
           port = 6697;
