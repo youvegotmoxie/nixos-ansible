@@ -43,11 +43,11 @@ in {
     "etc_nixos" = {
       initialize = true;
       passwordFile = "${restic_passwd_path}";
-      pruneOpts = ["--keep-hourly 6" "--keep-daily 7" "--keep-weekly 4" "--keep-monthly 12"];
+      pruneOpts = ["--keep-daily 7"];
       paths = ["/etc/nixos"];
       repository = "/backups/{{ hostname }}/etc_nixos";
       timerConfig = {
-        OnCalendar = "hourly";
+        OnCalendar = "daily";
         RandomizedDelaySec = "10m";
       };
       extraBackupArgs = ["--cleanup-cache"];
@@ -76,10 +76,9 @@ in {
 
   home.file.".var/app/org.squidowl.halloy/config/halloy/config.toml".text = ''
     [servers.liberachat]
-    # shit
     nickname = "youvegotmoxie"
     server = "irc.libera.chat"
-    channels = ["#nixos", "#python", "#linux", "#politics"]
+    channels = ["#nixos", "#python", "#linux", "##politics", "#networking", "##programming", "#hardware", "##chat", "#docker", "#neovim", "#kubernetes"]
 
     [buffer.channel.topic]
     enabled = true
