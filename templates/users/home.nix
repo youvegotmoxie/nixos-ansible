@@ -75,6 +75,8 @@ in {
   };
 
   home.file.".var/app/org.squidowl.halloy/config/halloy/config.toml".text = ''
+    theme = "tokyo-night-storm"
+
     [servers.liberachat]
     nickname = "moxie-_-"
     server = "irc.libera.chat"
