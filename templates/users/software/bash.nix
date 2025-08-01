@@ -19,6 +19,7 @@
       gcm = "git checkout master";
       gpm = "git pull origin master";
       grep = "ugrep";
+      fps = "flatpak search";
     };
     bashrcExtra = ''
       if [[ $- != *i* ]] ; then
