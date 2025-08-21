@@ -1,6 +1,10 @@
 {
   programs.atuin = {
     enable = true;
+    daemon = {
+      enable = false;
+      logLevel = "info";
+    };
     enableBashIntegration = true;
     flags = [
       "--disable-up-arrow"
